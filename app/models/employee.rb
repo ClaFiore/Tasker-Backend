@@ -9,6 +9,12 @@ class Employee < ApplicationRecord
     # has_many :team_members, through: :team, class_name: "Employee"
     
     def managed_team
-        Team.find(self.managed_team_id)
+        if self.managed_team
+            team = Team.find(self.managed_team_id)
+            return team
+        else
+            return 'Not managing any team'
+        end
     end
+    
 end
