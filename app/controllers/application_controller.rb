@@ -11,7 +11,7 @@ class ApplicationController < ActionController::API
 
         begin
             employee_id = JWT.decode(token, 'Tasker')[0]['employee_id']
-            @uemployee = Employee.find(employee_id)
+            @employee = Employee.find(employee_id)
         rescue
             @employee = nil
         end
