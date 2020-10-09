@@ -1,5 +1,5 @@
 class Api::V1::ProjectsController < ApplicationController
-
+    skip_before_action :logged_in?, only: [:index]
     def index
         projects = Project.all 
         render json: projects, except: [:updated_at, :created_at]
