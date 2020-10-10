@@ -3,6 +3,7 @@ class Employee < ApplicationRecord
     has_many :tasks
     has_many :projects, through: :tasks
     has_secure_password
+    validates :email, uniqueness: { case_sensitive: false }
 
     def managed_team
         if self.managed_team_id

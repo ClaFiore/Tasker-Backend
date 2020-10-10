@@ -17,3 +17,4 @@ c = Employee.create(team_id: gitme.id, first_name: 'Claudia', last_name: 'Borghi
 s = Employee.create(team_id: gitme.id, first_name: 'Sanam', email: 'sanam@gmail.com', password: 'sanam', dob: 'May 24')
 
 proj = Project.create(title: 'Mod5 Final Project', content: 'Create a web app using Ruby on Rails for the backend and React for the frontend', team_id: gitme.id, due_by: DateTime.new(2020,10,22,18,00,00), status: 'in progress')
+proj2 = Project.create(title: 'Career Prep', content: 'Complete career prep with your career coach', team_id: gitme.id, due_by: DateTime.new(2020,10,23,18,00,00), status: 'in progress')
