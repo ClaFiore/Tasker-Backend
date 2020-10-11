@@ -22,3 +22,6 @@ proj3 = Project.create(title: 'MVP Presentation', content: 'Create your MVP, sty
 proj4 = Project.create(title: 'Graduation', content: 'Congrats, you made it! Enjoy Graduation day', team_id: gitme.id, due_by: Date.parse('2020-10-23'), status: 'in progress')
 proj5 = Project.create(title: 'Mod1 - Learn Ruby', content: 'Complete 1 cli project with a team-member', team_id: gitme.id, due_by: Date.parse('2020-07-31'), status: 'completed')
 proj5 = Project.create(title: 'Mod4 - Learn React', content: 'With a team-member create an app using React', team_id: gitme.id, due_by: Date.parse('2020-10-02'), status: 'completed')
+
+projA = Project.create(title: 'Complete Managed Team Evaluation', content: 'Prepare spreadsheet with detailed evaluation of your team', team_id: coaches.id, due_by: Date.parse('2020-09-30'), status: 'completed')
+projB = Project.create(title: 'Lectures Plan', content: 'Prepare lectures plan with syllabi for upcoming cohort', team_id: coaches.id, due_by: Date.parse('2020-11-01'), status: 'in progress')
