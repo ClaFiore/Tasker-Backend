@@ -12,9 +12,10 @@ class Api::V1::ProjectsController < ApplicationController
 
     def create
         project = Project.new(project_params)
+        
         if project.valid?
             project.save
-            render json: project #or render json: {message: 'Project was successfully created'}
+            render json: project, except: [:updated_at, :created_at] #or render json: {message: 'Project was successfully created'}
         else
             render json: {error: project.errors.full_messages.join('; ')}
         end
