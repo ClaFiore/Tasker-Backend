@@ -1,3 +1,5 @@
+require 'date'
+
 class Api::V1::TasksController < ApplicationController
 
     def index
@@ -11,10 +13,22 @@ class Api::V1::TasksController < ApplicationController
     end
 
     def create
-        task = Task.new(task_params)
+        title = params[:title]
+        content = params[:content]
+        start_time = params[:start]
+        end_time = params[:end]
+        priority = params[:priority]
+        project_id = params[:project_id]
+        team_member_id = params[:team_member_id]
+        status = params[:status]
+
+        task = Task.new(project_id: project_id, title: title, content: content, start: DateTime.strptime(start_time, '%m-%d-%Y %I:%M %p'), end: DateTime.strptime(end_time, '%m-%d-%Y %I:%M %p'),priority: priority, team_member_id: team_member_id, status: status)
+
+        byebug
+
         if task.valid?
             task.save
-            render json: task #or render json: {message: 'Task was successfully created'}
+            render json: task, except: [:updated_at, :created_at]
         else
             render json: {error: task.errors.full_messages.join('; ')}
         end
