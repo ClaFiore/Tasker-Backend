@@ -13,6 +13,15 @@ class Employee < ApplicationRecord
             return nil
         end
     end
+
+    # def managed_members
+    #     if self.managed_team_id
+    #         team = Team.find(self.managed_team_id)
+    #         return team.team_members
+    #     else
+    #         return nil
+    #     end
+    # end
     
 end
 

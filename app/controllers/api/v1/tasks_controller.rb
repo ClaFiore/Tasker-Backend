@@ -24,8 +24,6 @@ class Api::V1::TasksController < ApplicationController
 
         task = Task.new(project_id: project_id, title: title, content: content, start: DateTime.strptime(start_time, '%m-%d-%Y %I:%M %p'), end: DateTime.strptime(end_time, '%m-%d-%Y %I:%M %p'),priority: priority, team_member_id: team_member_id, status: status)
 
-        byebug
-
         if task.valid?
             task.save
             render json: task, except: [:updated_at, :created_at]
@@ -36,9 +34,29 @@ class Api::V1::TasksController < ApplicationController
 
     def update
         task = Task.find_by(id: params[:id])
-        task.update(task_params)
-        render json: task, except: [:updated_at, :created_at]
+        
+            if !params[:start]
+                task.update(task_params)
+            else
+                title = params[:title]
+                content = params[:content]
+                start_time = params[:start]
+                end_time = params[:end]
+                priority = params[:priority]
+                project_id = params[:project_id]
+                team_member_id = params[:team_member_id]
+                status = params[:status]
+                task.update(project_id: project_id, title: title, content: content, start: DateTime.strptime(start_time, '%m-%d-%Y %I:%M %p'), end: DateTime.strptime(end_time, '%m-%d-%Y %I:%M %p'),priority: priority, team_member_id: team_member_id, status: status)
+            end
+
+        if task.valid?
+            task.save
+            render json: task, except: [:updated_at, :created_at]
+        else
+            render json: {error: task.errors.full_messages.join('; ')}
+        end
     end
+
 
     def destroy
         task = Task.find_by(id: params[:id])
