@@ -4,7 +4,7 @@ class Api::V1::TasksController < ApplicationController
 
     def index
         tasks = Task.all 
-        render json: tasks, except: [:updated_at, :created_at]
+        render json: tasks, except: [:updated_at, :created_at], include: [:team_member => {except: [:created_at, :updated_at]}]
     end
 
     def show
