@@ -13,6 +13,7 @@ class Api::V1::TasksController < ApplicationController
     end
 
     def create
+  
         title = params[:title]
         content = params[:content]
         start_time = params[:start]
@@ -23,13 +24,17 @@ class Api::V1::TasksController < ApplicationController
         status = params[:status]
 
         task = Task.new(project_id: project_id, title: title, content: content, start: DateTime.strptime(start_time, '%m-%d-%Y %I:%M %p'), end: DateTime.strptime(end_time, '%m-%d-%Y %I:%M %p'),priority: priority, team_member_id: team_member_id, status: status)
-
         if task.valid?
             task.save
             render json: task, except: [:updated_at, :created_at]
         else
             render json: {error: task.errors.full_messages.join('; ')}
         end
+        
+        if params[:team_leader_id] && task.valid?
+            notification = Notification.create(task_id: task.id, read: false, team_member_id: team_member_id, team_leader_id: params[:team_leader_id])
+        end
+
     end
 
     def update

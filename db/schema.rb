@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_10_222050) do
+ActiveRecord::Schema.define(version: 2020_10_16_185945) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,15 +43,12 @@ ActiveRecord::Schema.define(version: 2020_10_10_222050) do
   end
 
   create_table "notifications", force: :cascade do |t|
-    t.string "title"
-    t.string "content"
-    t.string "notifiable_type"
-    t.integer "notifiable_id"
-    t.integer "from_employee_id"
-    t.integer "to_employee_id"
     t.boolean "read"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "team_member_id"
+    t.integer "team_leader_id"
+    t.integer "task_id"
   end
 
   create_table "projects", force: :cascade do |t|

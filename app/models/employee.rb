@@ -2,6 +2,8 @@ class Employee < ApplicationRecord
     belongs_to :team
     has_many :tasks, foreign_key: :team_member_id
     has_many :projects, through: :tasks
+    has_many :notifications, foreign_key: :team_member_id
+    has_many :notifications, foreign_key: :team_leader_id
     has_secure_password
     validates :email, uniqueness: { case_sensitive: false }
 
