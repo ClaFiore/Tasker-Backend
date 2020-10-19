@@ -4,6 +4,9 @@ class Notification < ApplicationRecord
     belongs_to :team_leader, class_name: "Employee"
 
     def time
-        self.created_at.strftime("%b %-d %y, %l:%M%P")
+        correct_time = ( self.created_at.to_time - 4.hours).to_datetime
+        correct_time.strftime("%b %-d %y, %l:%M%P")
     end
 end
+
+
