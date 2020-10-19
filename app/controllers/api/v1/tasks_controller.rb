@@ -4,12 +4,12 @@ class Api::V1::TasksController < ApplicationController
 
     def index
         tasks = Task.all 
-        render json: tasks, except: [:updated_at, :created_at], include: [:team_member => {except: [:created_at, :updated_at]}], include: [:project => {except: [:created_at, :updated_at]}]
+        render json: tasks, except: [:updated_at, :created_at], include: [:team_member => {except: [:created_at, :updated_at]}, :project => {except: [:created_at, :updated_at]}]
     end
 
     def show
         task = Task.find_by(id: params[:id])
-        render json: task, except: [:updated_at, :created_at]
+        render json: task, except: [:updated_at, :created_at], include: [:team_member => {except: [:created_at, :updated_at]}, :project => {except: [:created_at, :updated_at]}]
     end
 
     def create
@@ -26,7 +26,7 @@ class Api::V1::TasksController < ApplicationController
         task = Task.new(project_id: project_id, title: title, content: content, start: DateTime.strptime(start_time, '%m-%d-%Y %I:%M %p'), end: DateTime.strptime(end_time, '%m-%d-%Y %I:%M %p'),priority: priority, team_member_id: team_member_id, status: status)
         if task.valid?
             task.save
-            render json: task, except: [:updated_at, :created_at], include: [:team_member => {except: [:created_at, :updated_at]}], include: [:project => {except: [:created_at, :updated_at]}]
+            render json: task, except: [:updated_at, :created_at], include: [:team_member => {except: [:created_at, :updated_at]}, :project => {except: [:created_at, :updated_at]}]
         else
             render json: {error: task.errors.full_messages.join('; ')}
         end
@@ -56,7 +56,7 @@ class Api::V1::TasksController < ApplicationController
 
         if task.valid?
             task.save
-            render json: task, except: [:updated_at, :created_at], include: [:team_member => {except: [:created_at, :updated_at]}], include: [:project => {except: [:created_at, :updated_at]}]
+            render json: task, except: [:updated_at, :created_at], include: [:team_member => {except: [:created_at, :updated_at]}, :project => {except: [:created_at, :updated_at]}]
         else
             render json: {error: task.errors.full_messages.join('; ')}
         end
