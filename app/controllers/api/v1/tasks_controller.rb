@@ -32,7 +32,7 @@ class Api::V1::TasksController < ApplicationController
         end
         
         if params[:team_leader_id] && task.valid?
-            notification = Notification.create(task_id: task.id, read: false, team_member_id: team_member_id, team_leader_id: params[:team_leader_id], message: params[:message])
+            notification = Notification.create(task_id: task.id, header: title, read: false, team_member_id: team_member_id, team_leader_id: params[:team_leader_id], message: params[:message])
         end
 
     end
