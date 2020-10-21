@@ -2,7 +2,7 @@ class Api::V1::ProjectsController < ApplicationController
     # skip_before_action :logged_in?, only: [:index]
     def index
         projects = Project.all.sort { |a,b| a.due_by <=> b.due_by }
-        render json: projects, except: [:updated_at, :created_at]
+        render json: projects, except: [:updated_at, :created_at], include: [:tasks]
     end
 
     def show
